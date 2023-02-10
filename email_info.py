@@ -31,6 +31,7 @@ def mail():
     email = input('\nAttacker Email: ')
     password = getpass('\nAttacker Password: ')
     to = input('\nRecipient Email: ')
+    subject = input('\nSubject: ')
     mssg = MIMEText(input('\nMessage: '))
     number = input('\nNumber of Emails: ')
     smtp = input('\nSMTP Server (smtp.(your_input).com): ')
@@ -43,7 +44,7 @@ def mail():
         server.starttls()
         server.login(email, password)
         for i in range(1, int(number) + 1):
-            msg = f'From: {user}\nMessage: {mssg}'
+            msg = f'Subject: {subject}\nFrom: {user}\nMessage: {mssg}'
             server.sendmail(email, to, msg)
             print("\rE-mails sent: %i" % i)
             sleep(1)
