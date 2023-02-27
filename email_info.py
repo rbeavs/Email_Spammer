@@ -5,8 +5,12 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 import secrets
+import platform
 
-os.system('cls')
+if platform.system() == 'Windows':
+    os.system('cls')
+else:
+    os.system('clear')
 
 
 def mail():
@@ -47,7 +51,7 @@ def mail():
         server.login(email, password)
         for i in range(1, int(number) + 1):
             subject = secrets.token_hex(5)
-            msg = f'Subject: {subject}\nFrom: {user}\nMessage: {mssg}'
+            msg = f'From: {user}\nSubject: {subject}\nMessage: {mssg}'
             server.sendmail(email, to, msg)
             print("\rE-mails sent: %i" % i)
             sleep(1)
