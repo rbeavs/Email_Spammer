@@ -6,6 +6,8 @@ import smtplib
 from email.mime.text import MIMEText
 import secrets
 import platform
+from rich.progress import track
+from rich import print
 
 if platform.system() == 'Windows':
     os.system('cls')
@@ -14,23 +16,23 @@ else:
 
 
 def mail():
-    print('--------------------------------------------------------------------')
-    print('*                                                                  *')
-    print('*                                                                  *')
-    print('*               ______                   _                         *')
-    print('*              |  ____|               (_) |                        *')
-    print('*              | |__   _ __ ___   __ _ _| |                        *')
-    print("*              |  __| | '_ ` _ \ / _` | | |                        *")
-    print('*              | |____| | | | | | (_| | | |                        *')
-    print('*              |______|_| |_| |_|\__,_|_|_|                        *')
-    print('*               ____                  _                            *')
-    print('*              |  _ \                | |                           *')
-    print('*              | |_) | ___  _ __ ___ | |__   ___ _ __              *')
-    print("*              |  _ < / _ \| '_ ` _ \| '_ \ / _ \ '__|             *")
-    print('*              | |_) | (_) | | | | | | |_) |  __/ |                *')
-    print('*              |____/ \___/|_| |_| |_|_.__/ \___|_|                *')
-    print('*                                                                  *')
-    print('--------------------------------------------------------------------')
+    print('[bold red]--------------------------------------------------------------------[bold red]')
+    print('[bold red]*                                                                  *[bold red]')
+    print('[bold red]*                                                                  *[bold red]')
+    print('[bold red]*               ______                   _                         *[/bold red]')
+    print('[bold red]*              |  ____|               (_) |                        *[/bold red]')
+    print('[bold red]*              | |__   _ __ ___   __ _ _| |                        *[/bold red]')
+    print("[bold red]*              |  __| | '_ ` _ \ / _` | | |                        *[/bold red]")
+    print('[bold red]*              | |____| | | | | | (_| | | |                        *[/bold red]')
+    print('[bold red]*              |______|_| |_| |_|\__,_|_|_|                        *[/bold red]')
+    print('[bold red]*               ____                  _                            *[/bold red]')
+    print('[bold red]*              |  _ \                | |                           *[/bold red]')
+    print('[bold red]*              | |_) | ___  _ __ ___ | |__   ___ _ __              *[/bold red]')
+    print("[bold red]*              |  _ < / _ \| '_ ` _ \| '_ \ / _ \ '__|             *[/bold red]")
+    print('[bold red]*              | |_) | (_) | | | | | | |_) |  __/ |                *[/bold red]')
+    print('[bold red]*              |____/ \___/|_| |_| |_|_.__/ \___|_|                *[/bold red]')
+    print('[bold red]*                                                                  *[/bold red]')
+    print('[bold red]--------------------------------------------------------------------[/bold red]')
     print('\n\n')
 
     user = input('Name: ')
@@ -49,15 +51,15 @@ def mail():
         server.ehlo()
         server.starttls()
         server.login(email, password)
-        for i in range(1, int(number) + 1):
+        for i in track(range(1, int(number)), description="[red]Bombing..."):
             subject = secrets.token_hex(5)
             msg = f'From: {user}\nSubject: {subject}\nMessage: {mssg}'
             server.sendmail(email, to, msg)
-            print("\rE-mails sent: %i" % i)
+            print("[red]\rE-mails sent: %i" % i)
             sleep(1)
             sys.stdout.flush()
         server.quit()
-        print('\nEmails have been sent!')
+        print('[red]\nEmails have been sent!')
         sys.exit()
 
     except KeyboardInterrupt:
