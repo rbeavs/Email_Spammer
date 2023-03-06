@@ -51,7 +51,7 @@ def mail():
         server.ehlo()
         server.starttls()
         server.login(email, password)
-        for i in track(range(1, int(number)), description="[red]Bombing..."):
+        for i in track(range(1, int(number)+1), description="[red]Bombing..."):
             subject = secrets.token_hex(5)
             msg = f'From: {user}\nSubject: {subject}\nMessage: {mssg}'
             server.sendmail(email, to, msg)
