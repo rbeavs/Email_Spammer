@@ -54,9 +54,37 @@ def mail():
         sys.exit()
 
     except smtplib.SMTPAuthenticationError:
-        print('\n[bold red] [!] The username or password you entered was not accepted')
+        print('\n[bold red] [!] The username/password you entered was not accepted')
         sys.exit()
 
     except smtplib.SMTPConnectError:
         print("\n[bold red] [!] Couldn't connect to the SMTP server")
+        sys.exit()
+
+    except smtplib.SMTPSenderRefused:
+        print('\n[bold red] [!] Attacker Email Refused')
+        sys.exit()
+
+    except smtplib.SMTPRecipientsRefused:
+        print('\n[bold red] [!] Recipient Email Refused')
+        sys.exit()
+
+    except smtplib.SMTPDataError:
+        print('\n[bold red] [!] The email content is not accepted')
+        sys.exit()
+
+    except smtplib.SMTPServerDisconnected:
+        print('\n[bold red] [!] SMTP Connection Unexpectedly Interrupted')
+        sys.exit()
+
+    except ConnectionRefusedError:
+        print('\n[bold red] [!] There was a problem connecting. Please check your internet connection')
+        sys.exit()
+
+    except UnicodeError:
+        print('\n[bold red] [!] Please fill out all of the fields.')
+        sys.exit()
+
+    except TimeoutError:
+        print('\n[bold red] [!] Server response took too long')
         sys.exit()
