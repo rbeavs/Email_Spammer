@@ -1,4 +1,4 @@
-from email_info import mail
+from emailer import home
 
 if __name__ == '__main__':
-    mail()
+    home()
