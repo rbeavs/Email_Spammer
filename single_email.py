@@ -25,11 +25,17 @@ def single_email():
 
     print("\n [1] Send One Email ")
     print('\n [2] Blow Up This Poor Persons Inbox ')
+    print('\n [3] Main Menu ')
     answer = input('\n -> ')
     if answer == '1':
         number = 1
     elif answer == '2':
         number = input('\n Number of Emails: ')
+    elif answer == '3':
+        if platform.system() == 'Windows':
+            os.system('py main.py')
+        else:
+            os.system('Python3 main.py')
     else:
         print('[bold red] [!] Unrecognized Input ')
         sys.exit()
@@ -90,3 +96,6 @@ def single_email():
         print('\n')
         print('\n[bold red] [-] Bombing Interrupted')
         sys.exit()
+
+    except Exception as e:
+        print("\n[bold red] [!] Something went wrong.. Printing the error: {0}".format(e))
