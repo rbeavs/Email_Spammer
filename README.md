@@ -2,7 +2,7 @@
 
 ## Installation
 
-'''sh
+```sh
 - This is a simple terminal program. All you have to do is download the code, 
   navigate to the directory the code is in and run the command 'py main.py'
   and it will run the program.
@@ -13,13 +13,13 @@
 
 - Make sure to turn on 2 Factor Authentication on whatever email client you're using. 
   Then create an app password and when the program asks for the password use the app password.
-'''
+```
 
 ## Run
-'''sh
+```sh
 As far as the program works it's got a nice UI, fairly dummy proof, just follow the steps on screen.
 I would recommend using a gmail account at first if you're unfamiliar with how emailers work.
-'''
+```
 
 ## Capabilities
 
@@ -37,6 +37,7 @@ I would recommend using a gmail account at first if you're unfamiliar with how e
 - Works in all other areas
 
 ## Educational Use Only
+
 This is purely for education purposes only, the author
 won't be held liable for anything the user does
 
