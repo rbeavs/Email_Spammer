@@ -1,4 +1,4 @@
-![Email Spammer Screenshot](banner.png)
+
 
 # Email_Spammer
 
