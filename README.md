@@ -26,12 +26,6 @@ I would recommend using a gmail account at first if you're unfamiliar with how e
 - Looks sick with [rich](https://github.com/Textualize/rich) as well as some ASll art
 - Allows you to spoof your name
 
-## Issues
-
-- If you choose the multiple email option, if you're using a gmail account and
-  attempt to email another gmail account, gmail will block it. (working to resolve)
-  
-- Works in all other areas
 
 ## Educational Use Only
 
