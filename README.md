@@ -14,7 +14,7 @@
   Then create an app password and when the program asks for the password use the app password.
 
 ## Run
-As far as the program works it's got a nice UI, fairly dummy proof, just follow the steps on screen.
+As far as the program works it's got a nice API, fairly dummy proof, just follow the steps on screen.
 I would recommend using a gmail account at first if you're unfamiliar with how emailers work.
 
 
